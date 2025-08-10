@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { CreatPasswordPerso } from "../Hook/CreatPasswordPerso";
 
 function PersoPassword() {
-  const [nbTotal, setNbTotal] = useState(0);
-  const [nbMaj, setNbMaj] = useState(0);
-  const [nbCharSpe, setNbCharSpe] = useState(0);
-  const [nbNum, setNbNum] = useState(0);
-  const [nbMin, setNbMin] = useState(0);
+  const [nbTotal, setNbTotal] = useState(12);
+  const [nbMaj, setNbMaj] = useState(2);
+  const [nbCharSpe, setNbCharSpe] = useState(1);
+  const [nbNum, setNbNum] = useState(2);
+  const [nbMin, setNbMin] = useState(2);
 
   const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ function PersoPassword() {
   };
   return (
     <div className="contenaire-global">
-      <h2 className="title">Donner la valeur minimum pour chaque item</h2>
+      <h2 className="title">Valeur minimum pour chaque item</h2>
       <form onSubmit={handleSubmit} className="formulaire">
         <div className="champs">
           <label htmlFor="nbTotal">

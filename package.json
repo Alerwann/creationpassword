@@ -46,5 +46,16 @@
     "electron": "^37.2.6",
     "electron-builder": "^26.0.12",
     "wait-on": "^8.0.4"
+  },
+  
+  "build": {
+    "appId": "com.votresite.password-generator",
+    "productName": "Password Generator",
+    "directories": { "output": "dist" },
+    "files": ["build/**/*", "src/electron/**/*"],
+    "win": { "target": "nsis" },
+    "mac": { "target": "dmg" },
+    "linux": { "target": "AppImage" }
   }
+
 }
