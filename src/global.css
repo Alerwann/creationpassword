@@ -1,0 +1,182 @@
+/* src/styles/global.css */
+:root {
+  /* Variables d'espacement */
+  --spacing-unit: 8px;
+
+  /* Variables de couleurs */
+  --primary-color: rgb(24, 27, 26);
+  --secondary-color: rgba(236, 13, 13, 0.425);
+  --danger-color: #f71c03;
+  --warning-color: #f39c12;
+  --success-color: #1c8146;
+  --button-color: #036d19ff;
+
+  /* Variables de texte */
+  --text-color: rgb(185, 6, 6);
+  --text-light: #fd7e84;
+  --text-white: #f3abab;
+  --text-black: #1a1818;
+
+  /* Variables de fond */
+  --background-color: rgb(0, 0, 0);
+  --card-background: #6c706fa2;
+  --header-background: linear-gradient(
+    10deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+
+  /* Variables de bordures */
+  --border-radius: 80% 20% 85% 15% / 35% 75% 25% 65%;
+  --border-color: #bcc0c4;
+
+  /* Variables de box-shadow */
+  --shadow-light: 5px 2px 4px rgba(43, 43, 43, 0.1);
+  --shadow-medium: 5px 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-heavy: 5px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue";
+  font-size: calc(var(--spacing-unit) * 5);
+  color: var(--text-color);
+  background-color: var(--background-color);
+  line-height: 1.8;
+  height: 100vh;
+}
+
+.title {
+  font-size: calc(var(--spacing-unit) * 4);
+  color: var(--text-light);
+}
+/* Classes utilitaires globales */
+button {
+  padding: calc(var(--spacing-unit) * 1.8) calc(var(--spacing-unit) * 3);
+  border: 2px solid var(--text-color);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+  font-size: calc(var(--spacing-unit) * 3);
+  background-color: var(--primary-color);
+  color: var(--text-white);
+  width: 300px;
+  height: 100px;
+}
+
+button:hover {
+  background-color: var(--success-color);
+  transform: translateY(-1px);
+}
+
+.btn-danger {
+  background-color: var(--warning-color);
+  color: var(--text-black);
+}
+.btn-danger:hover {
+  background-color: var(--danger-color);
+  color: var(--text-white);
+}
+.btn-success {
+  background-color: var(--success-color);
+  color: var(--text-white);
+}
+
+
+.contenaire-global {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.formulaire {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+  font-size: calc(var(--spacing-unit) * 3);
+  color: var(--text-white);
+  gap: 10px;
+}
+
+.champs{
+  display:grid;
+  grid-template-columns: 1fr 1fr ;
+  gap: 10px;
+  justify-content:center;
+  align-content:end;
+  width: 100%;
+  
+  
+}
+
+input{
+  background-color: #f1d0d0;
+  width: 300px;
+ padding: 5px 10px;
+
+}
+h2{
+  text-align: center;
+  
+}
+
+.valider{
+  height: 60px;
+  margin-top: 20px;
+}
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 125%; /* Au-dessus du bouton */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  background-color: #333;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 1000;
+  
+  /* Animation */
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+/* Flèche pointant vers le bouton */
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #333;
+}
+
+/* Afficher au survol */
+.tooltip-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
