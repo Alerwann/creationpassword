@@ -13,11 +13,21 @@ function PersoPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const password = CreatPasswordPerso(nbTotal, nbCharSpe, nbMaj, nbNum, nbMin );
-    console.log(password);
-    navigate("/affichage", {
-      state: { password: password },
-    });
+ const total = parseInt(nbTotal);
+  const sommeMinimums = parseInt(nbMaj) + parseInt(nbMin) + parseInt(nbNum) + parseInt(nbCharSpe);
+  
+  if (total < sommeMinimums) {
+    alert(`Le nombre total (${total}) doit être supérieur ou égal à la somme des minimums (${sommeMinimums})`);
+    return;
+  }
+  
+  if (total < 4) {
+    alert("Le mot de passe doit contenir au moins 4 caractères");
+    return;
+  }
+  
+  const password = CreatPasswordPerso(total, nbCharSpe, nbMaj, nbNum, nbMin);
+  navigate("/affichage", { state: { password: password } });
   };
   const retourAccueil = () => {
     navigate('/');

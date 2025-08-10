@@ -92,7 +92,6 @@ button:hover {
   color: var(--text-white);
 }
 
-
 .contenaire-global {
   height: 100vh;
   display: flex;
@@ -106,35 +105,31 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
- 
+
   font-size: calc(var(--spacing-unit) * 3);
   color: var(--text-white);
   gap: 10px;
 }
 
-.champs{
-  display:grid;
-  grid-template-columns: 1fr 1fr ;
+.champs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
-  justify-content:center;
-  align-content:end;
+  justify-content: center;
+  align-content: end;
   width: 100%;
-  
-  
 }
 
-input{
+input {
   background-color: #f1d0d0;
   width: 300px;
- padding: 5px 10px;
-
+  padding: 5px 10px;
 }
-h2{
+h2 {
   text-align: center;
-  
 }
 
-.valider{
+.valider {
   height: 60px;
   margin-top: 20px;
 }
@@ -151,7 +146,7 @@ h2{
   bottom: 125%; /* Au-dessus du bouton */
   left: 50%;
   transform: translateX(-50%);
-  
+
   background-color: #333;
   color: white;
   padding: 8px 12px;
@@ -159,7 +154,7 @@ h2{
   font-size: 14px;
   white-space: nowrap;
   z-index: 1000;
-  
+
   /* Animation */
   transition: opacity 0.3s, visibility 0.3s;
 }
@@ -179,4 +174,17 @@ h2{
 .tooltip-container:hover .tooltip {
   visibility: visible;
   opacity: 1;
+  white-space: normal;
+}
+
+.password-display {
+  font-family: "Courier New", monospace;
+  font-size: 1.2em;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-black);
+  word-break: break-all;
+  letter-spacing: 1px;
 }

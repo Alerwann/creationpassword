@@ -7,15 +7,22 @@ let mainWindow;
 
 function createWindow() {
   // Créer la fenêtre principale
-  mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false
-    }
-  });
+mainWindow = new BrowserWindow({
+  width: 450,
+  height: 650,
+  resizable: false,
+  webPreferences: {
+    nodeIntegration: false,      // Plus sécurisé
+    contextIsolation: true,      // Isolation du contexte
+    enableRemoteModule: false,   // Désactiver le module remote
+  },
+  icon: path.join(__dirname, '../assets/password-icon.png')
+});
 
+// Empêcher l'ouverture de nouveaux onglets
+mainWindow.webContents.setWindowOpenHandler(() => {
+  return { action: 'deny' };
+});
   // Charger l'app React
   mainWindow.loadURL(
     isDev

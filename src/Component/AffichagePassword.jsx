@@ -29,7 +29,7 @@ function AffichagePassword(){
     return(
         <div className='contenaire-global'>
             <h3 className='title'>Le mot de passe généré:</h3>
-            <h2>{password} </h2>
+            <h2 className='password-display'>{password} </h2>
             
                 <button onClick={copierDansPressePapier}>  {copied ? ' ✅Copié !' : '📋 Copier'}</button>
                 <button onClick={retourParametre}>Changer les paramètres</button>
