@@ -1,49 +1,61 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
-const isDev = require('electron-is-dev');
 
-// Garder une référence globale de la fenêtre
 let mainWindow;
 
 function createWindow() {
-  // Créer la fenêtre principale
-mainWindow = new BrowserWindow({
-  width: 550,
-  height: 650,
-  resizable: false,
-  webPreferences: {
-    nodeIntegration: false,      // Plus sécurisé
-    contextIsolation: true,      // Isolation du contexte
-    enableRemoteModule: false,   // Désactiver le module remote
-  },
-  icon: path.join(__dirname, '../assets/password-icon.png')
-});
+  mainWindow = new BrowserWindow({
+    width: 550,
+    height: 650,
+    resizable: false,
+    webPreferences: {
+      nodeIntegration: true,           // Activé pour permettre l'exécution
+      contextIsolation: false,         // Désactivé pour compatibilité
+      enableRemoteModule: true,        // Activé
+      webSecurity: false,              // Désactivé pour les fichiers locaux
+      allowRunningInsecureContent: true, // Permettre le contenu local
+      experimentalFeatures: true,      // Fonctionnalités expérimentales
+      sandbox: false                   // Désactiver le sandbox
+    }
+  });
 
-// Empêcher l'ouverture de nouveaux onglets
-mainWindow.webContents.setWindowOpenHandler(() => {
-  return { action: 'deny' };
-});
-  // Charger l'app React
-  mainWindow.loadURL(
-    isDev
-      ? 'http://localhost:3000'  // En développement
-      : `file://${path.join(__dirname, '../build/index.html')}`  // En production
-  );
+  mainWindow.webContents.setWindowOpenHandler(() => {
+    return { action: 'deny' };
+  });
 
-  // Ouvrir les DevTools en développement
+  const isDev = !app.isPackaged;
+  
   if (isDev) {
-    mainWindow.webContents.openDevTools();
+    console.log('Mode développement');
+    mainWindow.loadURL('http://localhost:3000');
+  } else {
+    console.log('Mode production');
+    // Chemin pour l'app packagée
+    const indexPath = path.join(__dirname, '..', '..', 'build', 'index.html');
+    console.log('Chargement du fichier:', indexPath);
+    mainWindow.loadFile(indexPath);
   }
+
+  // DevTools pour vérifier
+  // mainWindow.webContents.openDevTools();
+
+  mainWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription, validatedURL) => {
+    console.error('Échec de chargement:', errorCode, errorDescription, validatedURL);
+  });
+
+  // Vérifier que JavaScript est activé
+  mainWindow.webContents.on('dom-ready', () => {
+    console.log('DOM prêt');
+    mainWindow.webContents.executeJavaScript('console.log("JavaScript fonctionne !");');
+  });
 
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
 }
 
-// L'app est prête
-app.on('ready', createWindow);
+app.whenReady().then(createWindow);
 
-// Quitter quand toutes les fenêtres sont fermées
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();

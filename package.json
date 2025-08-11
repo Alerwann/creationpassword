@@ -1,13 +1,14 @@
 {
   "name": "password-create",
   "version": "0.1.0",
+  "main": "src/electron/main.js",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
-    "electron-is-dev": "^3.0.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.8.0",
@@ -17,7 +18,8 @@
   "scripts": {
     "electron": "electron src/electron/main.js",
     "electron-dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron src/electron/main.js\"",
-    "electron-pack": "npm run build && electron-builder",
+    "electron-build": "npm run build && electron-builder",
+    "dist": "npm run build && electron-builder --publish=never",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -47,15 +49,39 @@
     "electron-builder": "^26.0.12",
     "wait-on": "^8.0.4"
   },
-  
   "build": {
-    "appId": "com.votresite.password-generator",
+    "appId": "com.password.generator",
     "productName": "Password Generator",
-    "directories": { "output": "dist" },
-    "files": ["build/**/*", "src/electron/**/*"],
-    "win": { "target": "nsis" },
-    "mac": { "target": "dmg" },
-    "linux": { "target": "AppImage" }
-  }
+    "directories": { 
+      "output": "dist" 
+    },
+    "files": [
+      "build/**/*",
+      "src/electron/main.js",
+      "package.json"
+    ],
+    "extraMetadata": {
+      "main": "src/electron/main.js"
+    },
+    "mac": {
+         "target": [
+        {
+          "target": "dmg",
+          "arch": "arm64"
+        },
+        {
+          "target": "dir",
+          "arch": "arm64"
+        }
+      ],
+      "category": "public.app-category.utilities",
+      "icon": "public/icon.icns"
+    },
 
+ 
+    "linux": {
+      "target": "AppImage",
+      "category": "public.app-category.utilities"
+    }
+  }
 }
